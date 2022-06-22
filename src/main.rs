@@ -1,5 +1,7 @@
 // use macroquad::*;
-use macroquad::prelude::*;
+use macroquad::{prelude::*};
+
+mod engine;
 
 fn window_conf() -> Conf {
     Conf{
@@ -13,19 +15,31 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
+    
+    // let mut direction = true;
+    let mut rec1 = engine::Square::new(40.0, 40.0, 80.0, engine::Colour{r: 0.5, g: 0.0, b: 0.0, a: 1.0}, );
+    let mut rec2 = engine::Square::new(100., 100., 60., engine::Colour{r:0.4, g:0.6, b:0.5, a:1.});
     loop{
-        let start = std::time::Instant::now();
         clear_background(BLACK);
 
-        // just so we have smth to look at :3 
-        let elapsed = start.elapsed();
-        if elapsed.as_millis() != 0 {
-            println!("fps: {}", 1000/ elapsed.as_millis());
-        } else{
-            println!("took: {} ms", elapsed.as_millis())
-        }
+
+        // if direction{
+        //     rec1.colour += engine::Colour{r: 0.01, g: 0.01, b: 0.01, a: 0. };
+        // } else {
+        //     rec1.colour -= engine::Colour{r: 0., g: 0.01, b: 0.01, a: 0.};
+        // }
+
+        // if is_key_down(KeyCode::Space){
+        //     direction = !direction;
+        // }
+        rec1.update();
+        rec2.update();
+        rec1.draw();
+        rec2.draw();
+
 
         next_frame().await
         
     }
 }
+
